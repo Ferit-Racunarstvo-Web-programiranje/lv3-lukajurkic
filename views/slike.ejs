@@ -1,0 +1,46 @@
+
+<head>
+	<title>Movie page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="This page shows data on movies">
+	<meta name="keywords" content="movies, html, css, data">
+	<meta name="author" content="Luka Jurkic">
+	<link rel="stylesheet" href="style/style_slike.css">
+</head>
+
+<body>
+	<header>
+		<h1>Welcome to movie web page</h1>
+	</header>
+	<header>
+		<nav aria-labelledby="primarna-navigacija">
+			<div class="dropdown">
+				<h2 id="primarna-navigacija">Navigacija</h2>
+				<div aria-label="dropdown-navigation" class="dropdown-content">
+					<a href="./index.html">Pocetna</a>
+					<a href="slike">Galerija slika</a>
+					<a href="./graph.html">Graf</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<h1 class="title">Galerija slika</h1>
+	<div class="img-gallery-magnific">
+		<% images.forEach((image, index) => { %>
+		  <figure class="galerija_slika">
+			<a class="image-popup-vertical-fit" href="#img<%= index %>" title="<%= image.title %>">
+			  <img src="<%= image.url %>" alt="<%= image.title %>" loading="lazy">
+			</a>
+			<div class="overlay">
+			  <div class="text"><%= image.title %></div>
+			</div>
+		  </figure>
+	  
+		  <div class="lightbox" id="img<%= index %>">
+			<a href="#!" class="close">x</a>
+			<img src="<%= image.url %>" alt="<%= image.title %>">
+		  </div>
+		<% }); %>
+	  </div>
+</body>
