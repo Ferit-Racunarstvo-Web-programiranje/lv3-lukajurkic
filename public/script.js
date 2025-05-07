@@ -15,9 +15,9 @@ window.addEventListener('DOMContentLoaded', () =>{
                 directors: film.directors?.split(',').map(c => c.trim()) || [],
                 duration: Number(film.duration),
                 country: film.country?.split(',').map(c => c.trim()) || [],
-                total_votes: Number(film.total_votes)
+                total_votes: Number(film.avg_vote)
             }));
-            filmovi = filmovi.slice(0, 20);
+            filmovi = filmovi.slice(0, 100);
             filtriraniFilmovi = filmovi;
             console.log(filmovi);
             fillTable(filmovi);
@@ -98,21 +98,24 @@ function fillSortByGenre(filmovi){
 function filtriraj() {
     const zanr = document.getElementById('filter-genre')?.value || ''
     console.log(zanr);
-    const godinaOd = parseInt(document.getElementById('filter-year').value);
+    const godinaOd = parseInt(document.getElementById('filter-year-from').value);
+    const godinaDo = parseInt(document.getElementById('filter-year-to').value);
+    const ocjenaOd = parseInt(document.getElementById('filter-vote-from').value);
+    const ocjenaDo = parseInt(document.getElementById('filter-vote-to').value);
     console.log(godinaOd);
-    // TODO: handle multiple countries with check boxes
-    const drzave = Array.from(document.querySelectorAll('input[name="country"]:checked'))
-    .map(checkbox => checkbox.value)
-    .filter(value => value !== '');
+    const drzave = Array.from(document.querySelectorAll('input[name="country"]:checked')).map(checkbox => checkbox.value).filter(value => value !== '');
     console.log(drzave);
     const duljina = parseInt(document.getElementById('filter-length').value);
     console.log(duljina);
     filtriraniFilmovi = filmovi.filter(film => {
         const zanrMatch = !zanr || film.genre === zanr
         const godinaOdMatch = !godinaOd || film.year >= godinaOd;
+        const godinaDoMatch = !godinaDo || film.year <= godinaDo;
+        const ocjenaOdMatch = !ocjenaOd || film.total_votes >= ocjenaOd;
+        const ocjenaDoMatch = !ocjenaDo || film.total_votes <= ocjenaDo;
         const drzavaMatch = drzave.length === 0 || drzave.some(country => film.country.includes(country));
         const duljinaMatch = film.duration >= duljina;
-        return zanrMatch && godinaOdMatch && drzavaMatch && duljinaMatch;
+        return zanrMatch && godinaOdMatch && godinaDoMatch && ocjenaOdMatch && ocjenaDoMatch && drzavaMatch && duljinaMatch;
     });
     console.log(filtriraniFilmovi);
     fillTable(filtriraniFilmovi);

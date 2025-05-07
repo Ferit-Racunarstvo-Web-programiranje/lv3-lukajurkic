@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Karlo Stefanac">
-    <link rel="stylesheet" href="/style/videoteka.css">
+    <meta name="author" content="Luka Jurkic">
+    <link rel="stylesheet" href="./style/videoteka.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <title>Filmovi</title>
+    <title>Videoteka</title>
 </head>
 <body>
     <header>
-		<h1>Dobrodosli u Videoteku!!</h1>
-	</header>
-    <nav>
-        <button class="dropbtn" aria-labelledby="Navigacija">| | |</button>
-            <div class="dropdown-content">
-                <a href="/">Pocetna</a>
-                <a href="/grafikon">Grafikon</a>
-                <a href="/slike">Galerija</a>
-                <a href="/videoteka">Videoteka</a>
+		<h1>Videoteka</h1>
+        <nav>
+            <nav aria-labelledby="primarna-navigacija">
+                <div class="dropdown">
+                    <h2 id="primarna-navigacija">Navigacija</h2>
+                    <div aria-label="dropdown-navigation" class="dropdown-content">
+                    <a href="./index.html">Pocetna</a>
+                    <a href="slike">Galerija slika</a>
+                    <a href="./graph.html">Graf</a>
+                    <a href="./videoteka.html">Videoteka</a>
+                </div>
             </div>                
-    </nav>
+        </nav>
+	</header>
+
     <div class="kosarica-container">
         <button class="dropbtn">Kosarica</button>
         <div class="dropdown-kosarica">
@@ -35,8 +39,15 @@
     <div id="filteri">
         <select id="filter-genre">
         </select>
-        <input type="number" id="filter-year" placeholder="Godina od">
-        
+        <br>
+        <label>Godina:</label>
+        <input type="number" min="1800" max="2200" step="1" id="filter-year-from" placeholder="od: 1800">
+        <input type="number" min="1800" max="2200" step="1" id="filter-year-to" placeholder="do: 2200">
+        <br>
+        <label>Ocjena:</label>
+        <input type="number" min="1" max="10" step="0.1" id="filter-vote-from" placeholder="od: 1">
+        <input type="number" min="1" max="10" step="0.1" id="filter-vote-to" placeholder="do: 10">
+        <br>
         <!-- <select id="filter-country"> -->
         <div id="filter-country"></div>
         <input type="range" id="filter-length" min="60" max="180" step="5" value="60">
